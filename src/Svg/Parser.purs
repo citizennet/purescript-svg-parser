@@ -121,12 +121,6 @@ nodeParser = defer \_ ->
   try commentParser <|>
   elementParser
 
-xmlDeclarationParser :: Parser String
-xmlDeclarationParser = do
-  skipSpaces
-  decl <- string "<?xml" *> manyTill anyChar (string "?>")
-  pure $ charListToString decl
-
 beforeSvgParser :: Parser String
 beforeSvgParser = do
   charListToString <$> manyTill anyChar (lookAhead $ string "<svg")
